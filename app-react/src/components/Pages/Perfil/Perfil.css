@@ -1,0 +1,45 @@
+.profile-container {
+    max-width: 600px;
+    margin: 70px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.profile-field label {
+    flex: 1;
+    font-weight: bold;
+}
+
+.profile-field span {
+    flex: 2;
+}
+
+.profile-field input {
+    flex: 2;
+    padding: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.profile-field button {
+    flex: 0;
+    margin-left: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.btn-primary {
+    display: block;
+    margin: 0 auto;
+}
+
+

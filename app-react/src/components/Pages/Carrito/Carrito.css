@@ -1,0 +1,31 @@
+.fullscreen-shape {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, #5fbfff, #fc74c8);
+    z-index: -2; /* Para colocar el div detrás del contenido */
+}
+
+.btn-eliminar{
+    border: solid 1px red;
+    color: red;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.btn-eliminar:hover{
+    background-color: red;
+    color: white;
+    border: solid 1px red;
+}
+
+.img-card{
+    border-radius: 10px;
+}

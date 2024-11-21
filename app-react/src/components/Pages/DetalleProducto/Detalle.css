@@ -1,0 +1,75 @@
+.img-product{
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+.st-btn{
+    background-color: #5fbfff;
+    color: black;
+    border: none;
+    
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 10px 2px;
+    cursor: pointer;
+}
+
+.st-btn:hover{
+    background-color: #fc74c8;
+    color: white;
+    border: none;
+}
+
+.eliminar{
+    border: solid 1px rgb(168, 46, 46);
+    border-radius: 5px;
+    color: rgb(168, 46, 46);
+    padding: 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background:none;
+}
+
+.eliminar:hover{
+    background-color: rgb(168, 46, 46);
+    color: white;
+}
+
+.editar{
+    border: solid 1px rgb(14, 13, 13);
+    border-radius: 5px;
+    color: black;
+    padding: 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.editar:hover{
+    background-color: rgb(31, 31, 31);
+    color: white;
+}
+
+.link{
+    text-decoration: none;
+    color: #2b36b0;
+}
+
+.link:hover{
+    color: black;
+}
+
+.bg-gris{
+    background-color: rgb(69, 70, 71);
+}

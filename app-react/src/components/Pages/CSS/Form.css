@@ -1,0 +1,64 @@
+h1{
+    color: rgb(2, 2, 2);
+    font-size: 50px;
+    text-align: center;
+    padding: 50px;
+}
+
+label{
+    font-size: 18px;
+    color: rgb(2, 2, 2);
+    margin: 10px 0;
+    display: block;
+}
+
+input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid rgb(2, 2, 2);
+}
+
+legend{
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(2, 2, 2);
+    margin: 10px 0;
+    display: block;
+}
+
+.black{
+    color:black;
+}
+
+.radio{
+    width: fit-content;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.radio div{
+    padding: 20px;
+}
+
+.btn-azul{
+    background-color: #8a73c2; 
+    color: rgb(255, 255, 255);
+    border-color:#432888; 
+    padding: 10px 20px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 30px 2px;
+    cursor: pointer;
+    border-radius: 5px; 
+}
+
+.btn-azul:hover{
+    background-color:#ffffff;
+    color:rgb(0, 0, 0);  
+}
+
+

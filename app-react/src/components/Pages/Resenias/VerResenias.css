@@ -1,0 +1,14 @@
+.btn-regresar {
+    margin-right: 1rem; /* Espacio entre el botón y el texto */
+}
+
+.d-flex.align-items-center.mb-4 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.left-aligned {
+    position: absolute;
+    left: 30px; /* Ajusta este valor según sea necesario */
+}

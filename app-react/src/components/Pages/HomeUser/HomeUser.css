@@ -1,0 +1,155 @@
+.fullscreen-shape {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, #5fbfff, #fc74c8);
+    z-index: -1; /* Para colocar el div detrás del contenido */
+}
+
+.encabezado{
+    background-image: url('https://judithcc.net/user/pages/02.docencia/Prometeob.jpg');
+    background-size: cover;
+}
+
+.encabezado h1{
+    color: white;
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 10%;
+}
+
+.img-card{
+    /*Estilo para que la imagen ocupe todo el ancho del card*/
+    /*max-height: fit-content;*/
+    max-height: 250px;
+    width: auto;
+    max-width: 97%;
+    border-radius: 5px;
+}
+
+.btn-azul{
+    background-color: #8a73c2; 
+    color: rgb(0, 0, 0);
+    border-color: #432888;  
+    padding: 10px 20px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px; 
+}
+
+.btn-azul:hover{
+    background-color:#ffffff;
+    color:rgb(0, 0, 0);  
+}
+
+.cont-img{
+    height: 250px;
+}
+
+.tarjeta{
+    background-color: rgb(69, 70, 71);
+    color: white;
+}
+
+.tarjeta:hover{
+    cursor: pointer;
+}
+
+
+.topnav {
+  overflow: hidden;
+}
+
+.precios{
+  margin-left: 3%;
+}
+
+.buscar{
+  margin-right: 3%;
+  margin-top: 47px;
+}
+
+.buscar input{
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+
+  color: black;
+}
+
+.topnav a.active {
+
+  color: white;
+}
+
+.topnav .search-container {
+  float: right;
+}
+
+.topnav input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+}
+
+.topnav .search-container button {
+  float: right;
+  padding: 6px 10px;
+
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.range-inputs {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.range-input {
+  width: 100px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.topnav .search-container button:hover {
+  background: #ccc;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav .search-container {
+    float: none;
+  }
+  .topnav a, .topnav input[type=text], .topnav .search-container button {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+   
+  }
+  .topnav input[type=text] {
+    border: 1px solid #ccc;  
+  }
+}

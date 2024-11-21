@@ -1,0 +1,12 @@
+/* StarRating.css */
+.star {
+  margin: 10px;
+  fill: grey;
+  cursor: pointer;
+}
+
+.star.hovered,
+.star.filled {
+  fill: gold;
+}
+

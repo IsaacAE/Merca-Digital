@@ -1,0 +1,199 @@
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust size as needed */
+    grid-gap: 10px;
+    padding: 20px;
+  }
+  
+  .product-item {
+    border: 1px solid rgb(69, 70, 71);;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    background-color: rgb(69, 70, 71);
+    color: white;
+  }
+  
+  .product-image {
+    max-width: 100%;
+    max-height: 250px;
+    /*width: 100%;
+    height: 150px; /* Fixed height, or as per your design */
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .product-info {
+    margin-top: 20px;
+  }
+
+  .product-info:hover{
+    cursor: pointer;
+  }
+
+  .btn-azul{
+    background-color: #8a73c2; 
+    color: rgb(254, 254, 254);
+    border-color: #432888;  
+    padding: 10px 20px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px; 
+}
+
+.btn-azul:hover{
+   background-color:#ffffff;
+   color:rgb(0, 0, 0); 
+}
+
+.btn-regresar{
+    background-color: #8a73c2; 
+    color: rgb(254, 254, 254);
+    border-color: #432888; 
+    padding: 10px 20px; 
+    text-decoration: none;
+    margin: 50px 50px;
+    cursor: pointer;
+    border-radius: 5px; 
+    position: absolute;
+
+}
+
+.agregar{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 20px;
+    padding: 10px 20px;
+}
+
+.card-borrosa{
+  opacity: 0.7;
+  border: 1px solid rgb(242, 158, 3);
+}
+
+.imagen{
+  height: 250px;
+}
+
+.imagen:hover{
+  cursor: pointer;
+}
+  
+.eliminar{
+    border: solid 1px rgb(168, 46, 46);
+    border-radius: 5px;
+    color: rgb(168, 46, 46);
+    padding: 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.eliminar:hover{
+    background-color: rgb(168, 46, 46);
+    color: white;
+}
+
+.editar{
+    border: solid 1px rgb(14, 13, 13);
+    border-radius: 5px;
+    color: black;
+    padding: 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.editar:hover{
+    background-color: rgb(31, 31, 31);
+    color: white;
+}
+
+.topnav {
+  overflow: hidden;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+
+  color: black;
+}
+
+.topnav a.active {
+
+  color: white;
+}
+
+.topnav .search-container {
+  float: right;
+  width: 300px;
+}
+
+.topnav input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+}
+
+.topnav .search-container button {
+  float: right;
+  padding: 6px 10px;
+
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.range-inputs {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.range-input {
+  width: 100px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.topnav .search-container button:hover {
+  background: #ccc;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav .search-container {
+    float: none;
+  }
+  .topnav a, .topnav input[type=text], .topnav .search-container button {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+   
+  }
+  .topnav input[type=text] {
+    border: 1px solid #ccc;  
+  }
+}

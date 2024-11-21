@@ -1,0 +1,23 @@
+.info-vendedor{
+    display: flex;
+    justify-content:safe;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid rgb(69, 70, 71);
+    border-radius: 5px;
+    background-color: rgb(69, 70, 71);
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    color: white;
+}
+
+.info-text{
+    margin-left: 20px;
+
+}
+
+.imagen-gal{
+    min-width: 70px;
+    min-height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}

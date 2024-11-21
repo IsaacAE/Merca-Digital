@@ -1,0 +1,41 @@
+.confirmation-card {
+    background-color: #191818;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: fit-content;
+    margin: 0 auto;
+    margin-top: 30px;
+    z-index: 9999;
+    position: fixed;
+    top:50%;
+    left:47%;
+  }
+  
+  .confirmation-card p {
+    margin-bottom: 10px;
+    background-color: #191818;;
+  }
+  
+  .confirmation-card button {
+    margin-right: 10px;
+    padding: 8px 16px;
+    background-color: #94251d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .confirmation-card button:hover {
+    background-color: #530909;
+  }
+  
+  .confirmation-card button:last-child {
+    background-color: #073c48;
+  }
+  
+  .confirmation-card button:last-child:hover {
+    background-color: #092535;
+  }

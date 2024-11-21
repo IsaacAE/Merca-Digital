@@ -1,0 +1,56 @@
+/* Navigation.css */
+
+body {
+    background: linear-gradient(to bottom, #fc74c8,  #fa4fb8);
+    
+}
+
+.navegacion{
+    background-color:#2b36b0;
+}
+
+.nav-link {
+    color: white !important; 
+}
+
+img{
+    border-radius: 50%;
+    max-width: 60px;
+    max-height: 60px;
+}
+
+.position-dropdown{
+    margin-left: 90%;
+}
+
+.foto{
+    margin-right: 3%;
+}
+
+.carrito{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 22px;
+    margin-top:10px;
+}
+
+.tam{
+    font-size: 1.5em;
+}
+
+.opc-reg{
+    top:25px;
+}
+
+.registro{
+    position:absolute;
+    right: 5%;
+}
+
+.logo{
+    margin-right: 10px;
+}
+
+.marca{
+    font-size:x-large;
+}
