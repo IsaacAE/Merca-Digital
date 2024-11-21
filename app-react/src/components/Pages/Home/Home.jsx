@@ -22,7 +22,7 @@ export function Home() {
   return (
     <>
       <div className='fullscreen-shape'></div> {/* Fondo con forma */}
-      <h1 className='text-white'>Bienvenido a Prometienda</h1> {/* Título principal */}
+      <h1 className='text-white'>Bienvenido a Merca-Digital</h1> {/* Título principal */}
       <div className='text-center'>
         <img src={image} alt="imagen" className='custom-image' /> {/* Imagen del logo */}
       </div>

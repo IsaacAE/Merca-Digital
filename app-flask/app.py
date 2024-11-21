@@ -97,7 +97,7 @@ def enviar_correo_cuenta():
     name = request.form.get('nombre')  # Nombre del usuario
     to_email = request.form.get('correo')  # Correo del destinatario
     user_password = request.form.get('contraseña')  # Contraseña del usuario
-    message = f"Hola, {name}.\n\nEste correo es para informar que la creación de tu cuenta en Prometienda ha sido exitosa.\n\nNo olvides que tu contraseña es: {user_password}"
+    message = f"Hola, {name}.\n\nEste correo es para informar que la creación de tu cuenta en Merca-Digital ha sido exitosa.\n\nNo olvides que tu contraseña es: {user_password}"
     
     # Configuración del mensaje de correo
     msg = MIMEMultipart()

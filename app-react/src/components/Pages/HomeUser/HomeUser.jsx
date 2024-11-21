@@ -130,7 +130,7 @@ export default function HomeUser() {
             <header className="bg-dark py-5 encabezado">
                 <div className="container px-4 px-lg-5 my-5">
                     <div className="text-center text-white">
-                        <h1 className="display-4 fw-bolder">Bienvenido a Prometienda {cookies.user['nombre']}</h1>
+                        <h1 className="display-4 fw-bolder">Bienvenido a Merca-Digital {cookies.user['nombre']}</h1>
                         <p className="lead fw-normal text-white-70 mb-0">Tu tienda virtual de la Facultad de Ciencias</p>
                     </div>
                 </div>

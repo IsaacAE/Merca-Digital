@@ -9,7 +9,7 @@ export default function Footer(){
             <footer className="py-5 bg-dark">
                 <div className="container">
                     {/* Texto centrado en el pie de página, con el año de copyright */}
-                    <p className="m-0 text-center text-white">Copyright &copy; Prometienda 2024</p>
+                    <p className="m-0 text-center text-white">Copyright &copy; Merca-Digital 2024</p>
                 </div>
             </footer>
         </div>

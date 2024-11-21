@@ -32,7 +32,7 @@ export default function Navigation(){
         <nav className="navbar navbar-expand-lg navegacion" data-bs-theme="dark">
           <div className="container-fluid">
             {/* Logo de la tienda */}
-            <a className="navbar-brand marca" ><img src={logo} className='logo'/>Prometienda</a>
+            <a className="navbar-brand marca" ><img src={logo} className='logo'/>Merca-Digital</a>
             {/* Botón para dispositivos móviles */}
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
