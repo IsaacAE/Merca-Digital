@@ -22,6 +22,8 @@ const StarRating = ({ rating, onRatingChange }) => {
     <div className="star-rating">
       {[1, 2, 3, 4, 5].map((index) => (
         <svg
+          aria-label={`Star ${index}`}
+          role="button"
           key={index}
           width={starSize}
           height={starSize}

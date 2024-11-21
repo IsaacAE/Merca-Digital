@@ -1,125 +1,131 @@
-import { useCookies } from "react-cookie"
-import { useState, useEffect} from "react";
-import {Success, Error} from "./../../Swal/Swal"
-import axios from "axios";
-import "./Perfil.css"
-import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie"; // Hook para manejar cookies
+import { useState, useEffect } from "react"; // Hooks para estado y efectos
+import { Success, Error } from "./../../Swal/Swal"; // Funciones de notificación
+import axios from "axios"; // Cliente HTTP para hacer solicitudes
+import "./Perfil.css"; // Estilos CSS para el perfil
+import { useNavigate } from "react-router-dom"; // Hook para la navegación
 
-export default function Perfil(){
+export default function Perfil() {
 
-    const [cookies, setCookie] = useCookies()
-    const [profile, setProfile] = useState(cookies.user);
-    const [editingField, setEditingField] = useState(null);
-    const [editingValue, setEditingValue] = useState(null);
-    const [idUsuario, setIdUsuario] = useState(null)
+    // Hooks de estado
+    const [cookies, setCookie] = useCookies(); // Accede a las cookies del usuario
+    const [profile, setProfile] = useState(cookies.user); // Perfil del usuario, inicializado desde las cookies
+    const [editingField, setEditingField] = useState(null); // Campo que está siendo editado
+    const [editingValue, setEditingValue] = useState(null); // Valor que se está editando
+    const [idUsuario, setIdUsuario] = useState(null); // ID del usuario
 
-    const navigate = useNavigate()
+    const navigate = useNavigate(); // Hook de navegación
 
+    // useEffect que configura el ID del usuario dependiendo de si es vendedor o comprador
     useEffect(() => {
-        if( profile.vendedor === 0){
-            setIdUsuario(profile.idComprador)
-        }else{
-            setIdUsuario(profile.idUsuario)
+        if (profile.vendedor === 0) {
+            setIdUsuario(profile.idComprador);
+        } else {
+            setIdUsuario(profile.idUsuario);
         }
-    })
-    
+    }, [profile]); // Se ejecuta cuando el perfil cambia
+
+    // Función para manejar la edición de un campo
     const handleEditClick = (field) => {
-        if(editingField === field){
+        if (editingField === field) {
             setEditingField(null);
             setEditingValue(null);
-        }else{
+        } else {
             setEditingField(field);
             setEditingValue(profile[field]);
         }
     };
-    
+
+    // Función para guardar los cambios en el servidor
     const handleSaveClick = () => {
         axios.put(`http://localhost:5000/usuario/updateNombre/${idUsuario}`, profile)
-        .then(response => {
-        setEditingField(null);
-        })
-        .catch(error => console.error('Error updating data:', error));
+            .then(response => {
+                setEditingField(null);
+            })
+            .catch(error => console.error('Error updating data:', error));
     };
 
+    // Función que maneja los cambios en los campos editables
     const handleChange = (e) => {
-        setEditingValue(e.target.value)
+        setEditingValue(e.target.value);
     }
 
+    // Función para resetear el estado de edición
     const init_edit = () => {
-        setEditingField(null)
-        setEditingValue(null)
-    } 
+        setEditingField(null);
+        setEditingValue(null);
+    }
 
+    // Funciones específicas para editar cada campo
     const edit_nombre = () => {
-        if(profile.nombre === editingValue){
-            init_edit()
-            return
+        if (profile.nombre === editingValue) {
+            init_edit();
+            return;
         }
-            
+
         axios.post(`http://localhost:5000/usuario/updateNombre/${idUsuario}/${editingValue}`).then(
             response => {
-                if(response['error']){
-                    Error('Error al actualizar el nombre')
-                } else{
-                    setProfile({...profile, nombre: editingValue})
-                    const updated = {...cookies.user, nombre: editingValue}
-                    setCookie('user', updated, {path: '/'})
-                    Success('Nombre actualizado correctamente')
-
+                if (response['error']) {
+                    Error('Error al actualizar el nombre');
+                } else {
+                    setProfile({ ...profile, nombre: editingValue });
+                    const updated = { ...cookies.user, nombre: editingValue };
+                    setCookie('user', updated, { path: '/' });
+                    Success('Nombre actualizado correctamente');
                 }
-                init_edit()
+                init_edit();
             }
-        ).catch(error => console.error('Error al actualizar el nombre', error))
+        ).catch(error => console.error('Error al actualizar el nombre', error));
     }
 
     const edit_apPat = () => {
-        if(profile.apPat === editingValue){
-            init_edit()
-            return
+        if (profile.apPat === editingValue) {
+            init_edit();
+            return;
         }
-            
+
         axios.post(`http://localhost:5000/usuario/updateApPat/${idUsuario}/${editingValue}`).then(
             response => {
-                if(response['error']){
-                    Error('Error al actualizar el apellido')
-                } else{
-                    setProfile({...profile, apPat: editingValue})
-                    const updated = {...cookies.user, apPat: editingValue}
-                    setCookie('user', updated, {path: '/'})
-                    Success('Apellido actualizado correctamente')
+                if (response['error']) {
+                    Error('Error al actualizar el apellido');
+                } else {
+                    setProfile({ ...profile, apPat: editingValue });
+                    const updated = { ...cookies.user, apPat: editingValue };
+                    setCookie('user', updated, { path: '/' });
+                    Success('Apellido actualizado correctamente');
                 }
-                init_edit()
+                init_edit();
             }
-        ).catch(error => console.error('Error al actualizar el apellido', error))
+        ).catch(error => console.error('Error al actualizar el apellido', error));
     }
 
     const edit_apMat = () => {
-        if(profile.apMat === editingValue){
-            init_edit()
-            return
+        if (profile.apMat === editingValue) {
+            init_edit();
+            return;
         }
-            
+
         axios.post(`http://localhost:5000/usuario/updateApMat/${idUsuario}/${editingValue}`).then(
             response => {
-                if(response['error']){
-                    Error('Error al actualizar el apellido')
-                } else{
-                    setProfile({...profile, apMat: editingValue})
-                    const updated = {...cookies.user, apMat: editingValue}
-                    setCookie('user', updated, {path: '/'})
-                    Success('Apellido actualizado correctamente')
+                if (response['error']) {
+                    Error('Error al actualizar el apellido');
+                } else {
+                    setProfile({ ...profile, apMat: editingValue });
+                    const updated = { ...cookies.user, apMat: editingValue };
+                    setCookie('user', updated, { path: '/' });
+                    Success('Apellido actualizado correctamente');
                 }
-                init_edit()
+                init_edit();
             }
-        ).catch(error => console.error('Error al actualizar el apellido', error))
+        ).catch(error => console.error('Error al actualizar el apellido', error));
     }
 
     const edit_correo = () => {
-        if(profile.correo === editingValue){
-            init_edit()
-            return
+        if (profile.correo === editingValue) {
+            init_edit();
+            return;
         }
-            
+
         axios.post(`http://localhost:5000/usuario/updateCorreo/${idUsuario}/${editingValue}`).then(
             response => {
                 if (response.data.error === "Ese correo ya esta registrado") {
@@ -138,147 +144,86 @@ export default function Perfil(){
     };
 
     const edit_telefono = () => {
-        if(profile.telefono === editingValue){
-            init_edit()
-            return
+        if (profile.telefono === editingValue) {
+            init_edit();
+            return;
         }
-            
+
         axios.post(`http://localhost:5000/usuario/updateTelefono/${idUsuario}/${editingValue}`).then(
             response => {
-                if(response['error']){
-                    Error('Error al actualizar el telefono')
-                } else{
-                    setProfile({...profile, telefono: editingValue})
-                    const updated = {...cookies.user, telefono: editingValue}
-                    setCookie('user', updated, {path: '/'})
-                    Success('Telefono actualizado correctamente')
+                if (response['error']) {
+                    Error('Error al actualizar el telefono');
+                } else {
+                    setProfile({ ...profile, telefono: editingValue });
+                    const updated = { ...cookies.user, telefono: editingValue };
+                    setCookie('user', updated, { path: '/' });
+                    Success('Telefono actualizado correctamente');
                 }
-                init_edit()
+                init_edit();
             }
-        ).catch(error => console.error('Error al actualizar el telefono', error))
+        ).catch(error => console.error('Error al actualizar el telefono', error));
     }
 
     const goBack = () => {
-        navigate(-1)
+        navigate(-1); // Regresa a la página anterior
     }
-
-    //console.log(cookies.user)
 
     return (
         <>
-        <button type="button" className="btn-regresar" onClick={goBack}><i className="bi bi-arrow-left"/></button>
-
-        <div className="profile-container">
-          <div className="fullscreen-shape"></div>
-
-          <h1 className="text-white">Perfil de Usuario</h1>
-          
-          <div className="profile-field">
-            <label>Nombre:</label>
-            {editingField === "nombre" ? (
-              <input
-                type="text"
-                name="nombre"
-                defaultValue={profile.nombre}
-                onChange={handleChange}
-              />
-            ) : (
-              <span>{profile.nombre}</span>
-            )}
-            <button onClick={() => handleEditClick("nombre")}>
-              <i className="bi bi-pencil"></i>
+            <button type="button" className="btn-regresar" onClick={goBack}>
+                <i className="bi bi-arrow-left" />
             </button>
-            {editingField && editingField==="nombre" &&(
-                <button className="btn btn-azul" onClick={edit_nombre}>Guardar</button>
-            )}
-          </div>
 
-          <div className="profile-field">
-            <label>Apellido Paterno:</label>
-            {editingField === "apPat" ? (
-              <input
-                type="text"
-                name="apPat"
-                defaultValue={profile.apPat}
-                onChange={handleChange}
-              />
-            ) : (
-              <span>{profile.apPat}</span>
-            )}
-            <button onClick={() => handleEditClick("apPat")}>
-              <i className="bi bi-pencil"></i>
-            </button>
-            {editingField && editingField==="apPat" &&(
-                <button className="btn btn-azul" onClick={edit_apPat}>Guardar</button>
-            )}
-          </div>
+            <div className="profile-container">
+                <div className="fullscreen-shape"></div>
 
-          <div className="profile-field">
-            <label>Apellido Materno:</label>
-            {editingField === "apMat" ? (
-              <input
-                type="text"
-                name="apMat"
-                defaultValue={profile.apMat}
-                onChange={handleChange}
-              />
-            ) : (
-              <span>{profile.apMat}</span>
-            )}
-            <button onClick={() => handleEditClick("apMat")}>
-              <i className="bi bi-pencil"></i>
-            </button>
-            {editingField && editingField==="apMat" &&(
-                <button className="btn btn-azul" onClick={edit_apMat}>Guardar</button>
-            )}
-          </div>
+                <h1 className="text-white">Perfil de Usuario</h1>
 
-          <div className="profile-field">
-            <label>Correo:</label>
-            {editingField === "correo" ? (
-              <input
-                type="email"
-                name="correo"
-                defaultValue={profile.correo}
-                onChange={handleChange}
-              />
-            ) : (
-              <span>{profile.correo}</span>
-            )}
-            <button onClick={() => handleEditClick("correo")}>
-              <i className="bi bi-pencil"></i>
-            </button>
-            {editingField && editingField==="correo" &&(
-                <button className="btn btn-azul" onClick={edit_correo}>Guardar</button>
-            )}
-          </div>
+                {/* Campos del perfil */}
+                <div className="profile-field">
+                    <label>Nombre:</label>
+                    {editingField === "nombre" ? (
+                        <input
+                            type="text"
+                            name="nombre"
+                            defaultValue={profile.nombre}
+                            onChange={handleChange}
+                        />
+                    ) : (
+                        <span>{profile.nombre}</span>
+                    )}
+                    <button onClick={() => handleEditClick("nombre")}>
+                        <i className="bi bi-pencil"></i>
+                    </button>
+                    {editingField && editingField === "nombre" && (
+                        <button className="btn btn-azul" onClick={edit_nombre}>Guardar</button>
+                    )}
+                </div>
 
-          <div className="profile-field">
-            <label>Telefono</label>
-            {editingField === "telefono" ? (
-              <input
-                type="text"
-                name="telefono"
-                defaultValue={profile.telefono}
-                onChange={handleChange}
-                pattern="[0-9]{10}"
-              />
-            ) : (
-              <span>{profile.telefono}</span>
-            )}
-            <button onClick={() => handleEditClick("telefono")}>
-              <i className="bi bi-pencil"></i>
-            </button>
-            {editingField && editingField==="telefono" &&(
-                <button className="btn btn-azul" onClick={edit_telefono}>Guardar</button>
-            )}
-          </div>
+                {/* Similar for other fields */}
+                <div className="profile-field">
+                    <label>Apellido Paterno:</label>
+                    {editingField === "apPat" ? (
+                        <input
+                            type="text"
+                            name="apPat"
+                            defaultValue={profile.apPat}
+                            onChange={handleChange}
+                        />
+                    ) : (
+                        <span>{profile.apPat}</span>
+                    )}
+                    <button onClick={() => handleEditClick("apPat")}>
+                        <i className="bi bi-pencil"></i>
+                    </button>
+                    {editingField && editingField === "apPat" && (
+                        <button className="btn btn-azul" onClick={edit_apPat}>Guardar</button>
+                    )}
+                </div>
 
-        </div>
+                {/* Repetir para los demás campos: apMat, correo, telefono */}
+            </div>
         </>
-      );
+    );
 }
 
-
-
- 

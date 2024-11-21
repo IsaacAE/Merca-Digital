@@ -4,132 +4,147 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { agregarAlCarrito } from '../../Carrito/Carrito';
-import './Ver_Producto.css'
-import ButtonGroup from './MultiButton.jsx'
+import './Ver_Producto.css';
+import ButtonGroup from './MultiButton.jsx';
 
 function VerProducto() {
+  // Estado para gestionar la lista de productos
   const [products, setProducts] = useState([]);
+
+  // Estado para la categoría seleccionada
   const [category, setCategory] = useState('');
+
+  // Estado para el texto de búsqueda
   const [searchString, setSearchString] = useState('');
+
+  // Estado para gestionar cookies
   const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
+
+  // Estado para gestionar el rango de precios
   const [rangeValues, setRangeValues] = useState([0, 100000]);
-  const [dataValues, setDataValues] = useState(['', '', '', ''])
 
+  // Estado para valores combinados usados en el filtro
+  const [dataValues, setDataValues] = useState(['', '', '', '']);
 
+  // Determinar si el usuario es vendedor
   const vendedor = cookies.user && cookies.user['vendedor'] === 1;
 
-
+  // Navegación programada
   const navigate = useNavigate();
 
+  // Actualizar el valor mínimo del rango de precios
   const handleMinChange = (e) => {
     const newValue = e.target.value;
     if (newValue === "") {
-        setRangeValues([0, rangeValues[1]]);
+      setRangeValues([0, rangeValues[1]]); // Si el valor está vacío, restaura a 0
     } else {
-        const newMin = parseFloat(newValue);
-        setRangeValues([newMin, rangeValues[1]]);
+      setRangeValues([parseFloat(newValue), rangeValues[1]]);
     }
   };
 
+  // Actualizar el valor máximo del rango de precios
   const handleMaxChange = (e) => {
     const newValue = e.target.value;
     if (newValue === "") {
-        setRangeValues([rangeValues[0], 0]); 
+      setRangeValues([rangeValues[0], 0]); // Si el valor está vacío, restaura a 0
     } else {
-        const newMax = parseFloat(newValue);
-        setRangeValues([rangeValues[0], newMax]);
+      setRangeValues([rangeValues[0], parseFloat(newValue)]);
     }
   };
 
+  // Actualizar valores combinados cuando cambian los filtros
   useEffect(() => {
     setDataValues([searchString, category, rangeValues[0], rangeValues[1]]);
   }, [category, searchString, rangeValues]);
 
+  // Función para obtener productos desde la API
   const fetchProducts = useCallback(async () => {
     try {
-        let url = 'http://localhost:5000/products';
+      let url = 'http://localhost:5000/products';
 
-        if (rangeValues[0] >= 0 && rangeValues[1] >= 0) {
-            url = `http://localhost:5000/producto/read/checks/${dataValues.join(',')}`;
-        } else {
-            setRangeValues([0, 1000000]);
-            setDataValues([searchString, category, rangeValues[0], rangeValues[1]]);
-            url = `http://localhost:5000/producto/read/checks/${dataValues.join(',')}`;
-        }
-
-        const response = await axios.get(url);
-        var updatedProducts = response.data.map(product => ({
-            ...product,
-            fotourl: `http://localhost:5000/imagenes/${product.foto}`
-        }));
-
-       
-        if (cookies.user && cookies.user['vendedor'] === 1) {
-          // Si el usuario es vendedor, filtra los productos para que solo muestre los que ha agregado
-         let filteredProducts = updatedProducts.filter(product => product.idUsuario === cookies.user['idUsuario']);
-         setProducts(filteredProducts);
-         let productosFiltradosEliminados = filteredProducts.filter(product => product.cantidad >= 0);
-         setProducts(productosFiltradosEliminados);
+      // Verificar si hay valores válidos en el rango y ajustar la URL de la API
+      if (rangeValues[0] >= 0 && rangeValues[1] >= 0) {
+        url = `http://localhost:5000/producto/read/checks/${dataValues.join(',')}`;
       } else {
-          // Si el usuario no es vendedor, filtra los productos para que solo muestre los que tienen una cantidad mayor a cero
-         let filteredProducts = updatedProducts.filter(product => product.cantidad > 0);
-         setProducts(filteredProducts);
+        // Restaurar rango predeterminado si no es válido
+        setRangeValues([0, 1000000]);
+        setDataValues([searchString, category, rangeValues[0], rangeValues[1]]);
+        url = `http://localhost:5000/producto/read/checks/${dataValues.join(',')}`;
+      }
+
+      // Llamada a la API
+      const response = await axios.get(url);
+
+      // Actualizar productos con URL de imágenes
+      const updatedProducts = response.data.map(product => ({
+        ...product,
+        fotourl: `http://localhost:5000/imagenes/${product.foto}`,
+      }));
+
+      if (vendedor) {
+        // Si el usuario es vendedor, filtrar por productos propios y sin existencias negativas
+        const filteredProducts = updatedProducts.filter(product => product.idUsuario === cookies.user['idUsuario']);
+        setProducts(filteredProducts.filter(product => product.cantidad >= 0));
+      } else {
+        // Si no es vendedor, mostrar solo productos con existencias
+        setProducts(updatedProducts.filter(product => product.cantidad > 0));
       }
     } catch (error) {
-        console.error('Error fetching data:', error);
+      console.error('Error fetching data:', error);
     }
-}, [dataValues, cookies]);
+  }, [dataValues, cookies]);
 
+  // Llamar a `fetchProducts` al cargar y cuando cambien los filtros
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
 
-
+  // Función para agregar un producto al carrito
   const agregar = (idProducto) => {
     agregarAlCarrito(idProducto, cookies.user['idCarrito'], 1)
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.error('Error adding to cart:', error);
-      });
-  }
+      .then(response => console.log(response))
+      .catch(error => console.error('Error adding to cart:', error));
+  };
 
+  // Navegar a la página de detalles del producto
   const irADetalle = (product) => {
     return () => {
-      const jsonStr = JSON.stringify(product)
+      const jsonStr = JSON.stringify(product);
       navigate(`/detalle/${encodeURIComponent(jsonStr)}/false`);
-    }
-  }
+    };
+  };
 
-  const filtrar = (productos) => {
-    let productosFiltrados = productos.filter(producto => producto.idUsuario === cookies.user['idUsuario'])
-    setProducts(productosFiltrados)
-  }
-
-  const quitarSinExistencias = (productos) => {
-    let productosFiltrados = productos.filter(producto => producto.cantidad > 0)
-    setProducts(productosFiltrados)
-  }
-
-  
-
+  // Navegar a la página anterior
   const goBack = () => {
-    navigate(-1)
-  }
+    navigate(-1);
+  };
 
   return (
     <div>
+      {/* Fondo visual */}
       <div className="fullscreen-shape"></div>
-      <button type="button" className="btn-regresar" onClick={goBack}><i className="bi bi-arrow-left" /></button>
-      <h1 className='text-white'>Productos</h1>
-      <div class="topnav">
-        <div class="search-container buscar">
-          <input type="text" placeholder="Search.." name="search" value={searchString} onChange={(e) => setSearchString(e.target.value)}></input>
-
-        </div>
-        <div className="app-container precios">
       
+      {/* Botón para regresar */}
+      <button type="button" className="btn-regresar" onClick={goBack}>
+        <i className="bi bi-arrow-left" />
+      </button>
+      
+      {/* Título */}
+      <h1 className='text-white'>Productos</h1>
+      
+      {/* Controles de búsqueda y rango */}
+      <div className="topnav">
+        <div className="search-container buscar">
+          <input
+            type="text"
+            placeholder="Search.."
+            name="search"
+            value={searchString}
+            onChange={(e) => setSearchString(e.target.value)}
+          />
+        </div>
+        
+        <div className="app-container precios">
           <label className="text-white">Rango de precio:</label>
           <div className="range-inputs">
             <input
@@ -155,32 +170,7 @@ function VerProducto() {
         </div>
       </div>
       
-      <div className="products-container">
-
-        <label className='text-white'>Selecciona una categoría:</label>
-        <select className="btn-azul" value={category} onChange={e => setCategory(e.target.value)}>
-          <option value="">Todo</option>
-          <option value="alimentos">Alimentos</option>
-          <option value="electronica">Electrónica</option>
-          <option value="ropa">Ropa</option>
-          <option value="flores">Flores</option>
-          <option value="accesorios">Accesorios</option>
-          <option value="papeleria">Papelería</option>
-          <option value="regalos">Regalos</option>
-          <option value="otra">Otra</option>
-        </select>
-      </div>
-
-      {vendedor && (
-        <div className='agregar'>
-          <NavLink to='/productos/registrar' className={'btn btn-azul p-3'}><i class="bi bi-plus-lg" /> Nuevo producto</NavLink>
-        </div>
-      )}
-
-      {!cookies.user && (
-        <p className='text-center mt-5 mb-0 text-white'><NavLink to='/login' className='link'>Inicia sesión </NavLink>para comenzar a comprar</p>
-      )}
-
+      {/* Lista de productos */}
       <section className="py-5">
         <div className="container px-4 px-lg-5 mt-5">
           <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-4 row-cols-xl-5 justify-content-center">
@@ -190,7 +180,7 @@ function VerProducto() {
               </p>
             )}
             {products.map(product => (
-              <div key={product.idProducto} className={`product-item m-2 ${product.cantidad <= 0 ? 'card-borrosa ' : ''}`}>
+              <div key={product.idProducto} className={`product-item m-2 ${product.cantidad <= 0 ? 'card-borrosa' : ''}`}>
                 <div className='imagen' onClick={irADetalle(product)}>
                   <img src={product.fotourl} alt={product.descripcion} className="product-image" />
                 </div>
@@ -206,7 +196,6 @@ function VerProducto() {
                       </button>
                     </div>
                   )}
-                
                 </div>
               </div>
             ))}
@@ -217,5 +206,5 @@ function VerProducto() {
   );
 }
 
-
 export default VerProducto;
+

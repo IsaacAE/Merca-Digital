@@ -1,3 +1,6 @@
+from sqlalchemy import Column, Integer, ForeignKey
+from alchemyClasses import db
+
 # Clase Almacenar que representa la tabla 'Almacenar' en la base de datos
 class Almacenar(db.Model):
     __tablename__ = 'Almacenar'  # Nombre de la tabla en la base de datos

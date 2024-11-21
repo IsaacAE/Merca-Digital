@@ -1,20 +1,21 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
-import { agregarAlCarrito } from '../Carrito/Carrito';
-import RangeSlider from '../Gadgets/RangeBar.jsx';
-import './HomeUser.css';
+import React, { useState, useEffect, useCallback } from 'react'; // Importa los hooks necesarios de React
+import axios from 'axios'; // Importa axios para hacer solicitudes HTTP
+import { NavLink, useNavigate } from 'react-router-dom'; // Importa los hooks de navegación
+import { useCookies } from 'react-cookie'; // Hook para gestionar cookies
+import { agregarAlCarrito } from '../Carrito/Carrito'; // Importa la función para agregar productos al carrito
+import RangeSlider from '../Gadgets/RangeBar.jsx'; // Importa el componente del control deslizante (RangeSlider)
+import './HomeUser.css'; // Importa los estilos del componente
 
 export default function HomeUser() {
-    const navigate = useNavigate();
-    const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
-    const [products, setProducts] = useState([]);
-    const [category, setCategory] = useState('');
-    const [searchString, setSearchString] = useState('');
-    const [rangeValues, setRangeValues] = useState([0, 1000000]);
-    const [dataValues, setDataValues] = useState(['','','',''])
+    const navigate = useNavigate(); // Hook para la navegación entre páginas
+    const [cookies, setCookie, removeCookie] = useCookies(['userToken']); // Hook para manejar cookies
+    const [products, setProducts] = useState([]); // Estado para almacenar los productos
+    const [category, setCategory] = useState(''); // Estado para almacenar la categoría seleccionada
+    const [searchString, setSearchString] = useState(''); // Estado para almacenar el texto de búsqueda
+    const [rangeValues, setRangeValues] = useState([0, 1000000]); // Estado para el rango de precios
+    const [dataValues, setDataValues] = useState(['','','','']); // Estado para almacenar los valores de búsqueda
 
+    // Función para actualizar el valor mínimo del rango de precios
     const handleMinChange = (e) => {
         const newValue = e.target.value;
         if (newValue === "") {
@@ -25,6 +26,7 @@ export default function HomeUser() {
         }
     };
 
+    // Función para actualizar el valor máximo del rango de precios
     const handleMaxChange = (e) => {
         const newValue = e.target.value;
         if (newValue === "") {
@@ -35,14 +37,17 @@ export default function HomeUser() {
         }
     };
 
+    // useEffect que se ejecuta cuando cambian las categorías, la cadena de búsqueda o los valores del rango de precios
     useEffect(() => {
         setDataValues([searchString, category, rangeValues[0], rangeValues[1]]);
     }, [category, searchString, rangeValues]);
 
+    // Función para obtener los productos con filtros aplicados
     const fetchProducts = useCallback(async () => {
         try {
             let url = 'http://localhost:5000/products';
 
+            // Si los valores del rango son válidos, se crea la URL con los filtros
             if (rangeValues[0] >= 0 && rangeValues[1] >= 0) {
                 url = `http://localhost:5000/producto/read/checks/${dataValues.join(',')}`;
             } else {
@@ -51,35 +56,37 @@ export default function HomeUser() {
                 url = `http://localhost:5000/producto/read/checks/${dataValues.join(',')}`;
             }
 
+            // Solicita los productos a la API
             const response = await axios.get(url);
             var updatedProducts = response.data.map(product => ({
                 ...product,
                 fotourl: `http://localhost:5000/imagenes/${product.foto}`
             }));
-           
 
+            // Filtra los productos según el rol del usuario
             if (cookies.user && cookies.user['vendedor'] === 1) {
-                // Si el usuario es vendedor, filtra los productos para que solo muestre los que ha agregado
-               let filteredProducts = updatedProducts.filter(product => product.idUsuario === cookies.user['idUsuario']);
-               setProducts(filteredProducts);
-               let productosFiltradosEliminados = filteredProducts.filter(producto => producto.cantidad >= 0);
-               setProducts(productosFiltradosEliminados);
+                // Si el usuario es un vendedor, filtra los productos para que solo vea los que ha agregado
+                let filteredProducts = updatedProducts.filter(product => product.idUsuario === cookies.user['idUsuario']);
+                setProducts(filteredProducts);
+                let productosFiltradosEliminados = filteredProducts.filter(producto => producto.cantidad >= 0);
+                setProducts(productosFiltradosEliminados);
             } else {
-                // Si el usuario no es vendedor, filtra los productos para que solo muestre los que tienen una cantidad mayor a cero
-               let filteredProducts = updatedProducts.filter(product => product.cantidad > 0);
-               setProducts(filteredProducts);
+                // Si el usuario no es vendedor, solo muestra los productos con cantidad mayor que cero
+                let filteredProducts = updatedProducts.filter(product => product.cantidad > 0);
+                setProducts(filteredProducts);
             }
-
           
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     }, [dataValues, cookies]);
 
+    // useEffect para obtener los productos cuando cambian los datos de búsqueda o filtros
     useEffect(() => {
         fetchProducts();
     }, [fetchProducts]);
 
+    // Función para agregar productos al carrito
     const agregar = (idProducto) => {
         agregarAlCarrito(idProducto, cookies.user['idCarrito'], 1)
             .then(response => {
@@ -90,6 +97,7 @@ export default function HomeUser() {
             });
     }
 
+    // Función para redirigir al detalle de un producto
     const irADetalle = (product) => {
         return () => {
             const jsonStr = JSON.stringify(product);
@@ -97,25 +105,28 @@ export default function HomeUser() {
         }
     }
 
+    // Filtra productos para mostrar solo los que pertenecen al vendedor
     const filtrar = (productos) => {
-        let productosFiltrados = productos.filter(producto => producto.idUsuario === cookies.user['idUsuario'])
-        setProducts(productosFiltrados)
+        let productosFiltrados = productos.filter(producto => producto.idUsuario === cookies.user['idUsuario']);
+        setProducts(productosFiltrados);
         let productosFiltradosEliminados = productos.filter(producto => producto.cantidad >= 0);
         setProducts(productosFiltradosEliminados);
     }
 
+    // Filtra productos que tienen cantidad mayor que cero
     const quitarSinExistencias = (productos) => {
         let productosFiltrados = productos.filter(producto => producto.cantidad > 0);
         setProducts(productosFiltrados);
     }
 
+    // Función de búsqueda
     const handleSearch = () => {
         console.log("Cadena de búsqueda:", searchString);
     };
 
     return (
         <>
-            <div className="fullscreen-shape"></div>
+            <div className="fullscreen-shape"></div> {/* Fondo de pantalla */}
             <header className="bg-dark py-5 encabezado">
                 <div className="container px-4 px-lg-5 my-5">
                     <div className="text-center text-white">
@@ -124,6 +135,8 @@ export default function HomeUser() {
                     </div>
                 </div>
             </header>
+
+            {/* Barra de búsqueda y filtros */}
             <div className="topnav">
                 <div className="search-container buscar">
                     <input type="text" placeholder="Search.." name="search" value={searchString} onChange={(e) => setSearchString(e.target.value)} />
@@ -153,6 +166,8 @@ export default function HomeUser() {
                     <p>Valores actuales: {rangeValues[0]} - {rangeValues[1]}</p>
                 </div>
             </div>
+
+            {/* Selector de categoría */}
             <div className="products-container">
                 <label className='text-white'>Selecciona una categoría:</label>
                 <select className="btn-azul" value={category} onChange={e => setCategory(e.target.value)}>
@@ -167,6 +182,8 @@ export default function HomeUser() {
                     <option value="otra">Otra</option>
                 </select>
             </div>
+
+            {/* Sección de productos */}
             <section className="py-5">
                 <div className="container px-4 px-lg-5 mt-5">
                     <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -190,7 +207,6 @@ export default function HomeUser() {
                                                 </button>
                                             </div>
                                         )}
-                                        
                                     </div>
                                 </div>
                             </div>
@@ -199,6 +215,7 @@ export default function HomeUser() {
                 </div>
             </section>
 
+            {/* Botones para ver más productos o gestionar productos si es vendedor */}
             <div className='text-center mb-5'>
                 {cookies.user['vendedor'] === 0 && (
                     <NavLink to='/productos/ver' className={'btn btn-azul'} >Ver más productos</NavLink>
@@ -211,5 +228,6 @@ export default function HomeUser() {
                 )}
             </div>
         </>
-    )
+    );
 }
+
