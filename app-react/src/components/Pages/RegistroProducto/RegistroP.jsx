@@ -163,15 +163,81 @@ export default function RegistroP() {
         navigate(-1);
     }
 
-    // Renderiza el formulario
-    return (
+   return(
         <div className="container">
             <div className="fullscreen-shape"></div>
-            <button type="button" className="btn-regresar" onClick={goBack}><i className="bi bi-arrow-left" /></button>
+            <button type="button" className="btn-regresar" onClick={goBack}><i className="bi bi-arrow-left"/></button>
             <h1 className="text-white">Registro de Producto</h1>
             <form onSubmit={handleSubmit}>
-                {/* Campos de entrada del formulario */}
-                {/* ... */}
+                <div className="mb-3">
+                    <label htmlFor="nombre" className="form-label">Nombre</label>
+                    <input type="text" className="form-control" id="nombre" aria-describedby="nombreHelp" required/>
+                    <div id="nombreHelp" className="form-text">Ingresa el nombre del producto</div>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="descripcion" className="form-label">Descripción</label>
+                    <textarea className="form-control" id="descripcion" aria-describedby="descripcionHelp" required></textarea>
+                    <div id="descripcionHelp" className="form-text">Ingresa una descripción del producto</div>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="precio" className="form-label">Precio</label>
+                    <input type="number" className="form-control" id="precio" min="0" aria-describedby="precioHelp" required/>
+                    <div id="precioHelp" className="form-text">Ingresa el precio del producto</div>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="stock" className="form-label">Stock</label>
+                    <input type="number" className="form-control" id="stock" aria-describedby="stockHelp" min="1" required/>
+                    <div id="stockHelp" className="form-text">Ingresa la cantidad de productos en stock</div>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="categoria" className="form-label">Categoría</label>
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" value="alimentos" id="categoriaAlimentos" onChange={handleCategoriaChange} />
+                        <label className="form-check-label" htmlFor="categoriaAlimentos">Alimentos</label>
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" value="electronica" id="categoriaElectronica" onChange={handleCategoriaChange} />
+                        <label className="form-check-label" htmlFor="categoriaElectronica">Electrónica</label>
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" value="ropa" id="categoriaRopa" onChange={handleCategoriaChange} />
+                        <label className="form-check-label" htmlFor="categoriaRopa">Ropa</label>
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" value="flores" id="categoriaFlores" onChange={handleCategoriaChange} />
+                        <label className="form-check-label" htmlFor="categoriaFlores">Flores</label>
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" value="accesorios" id="categoriaAccesorios" onChange={handleCategoriaChange} />
+                        <label className="form-check-label" htmlFor="categoriaAccesorios">Accesorios</label>
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" value="papeleria" id="categoriaPapeleria" onChange={handleCategoriaChange} />
+                        <label className="form-check-label" htmlFor="categoriaPapeleria">Papeleria</label>
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" value="regalos" id="categoriaRegalos" onChange={handleCategoriaChange} />
+                        <label className="form-check-label" htmlFor="categoriaRegalos">Regalos</label>
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" value="otra" id="categoriaOtra" onChange={handleCategoriaChange} defaultChecked/>
+                        <label className="form-check-label" htmlFor="categoriaOtra">Otra</label>
+                    </div>
+    
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="contacto" className="form-label">Contacto</label>
+                    <input type="text" className="form-control" id="contacto" aria-describedby="contactoHelp" required/>
+                    <div id="contactoHelp" className="form-text">Ingresa el contacto del producto</div>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="imagen" className="form-label">Imagen</label>
+                    <input type="file" className="form-control" id="imagen" aria-describedby="imagenHelp" onChange={handleImagenChange} multiple/>
+                    <div id="imagenHelp" className="form-text">Selecciona una o varias imagenes del producto</div>
+                </div>
+                <div className="text-center">
+                    <button type="submit" className="btn btn-azul mt-3 mb-4">Registrar</button>
+                </div>
             </form>
         </div>
     )

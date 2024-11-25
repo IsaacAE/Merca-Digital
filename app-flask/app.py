@@ -92,8 +92,8 @@ def servir_imagen(nombre_imagen):
 # Ruta para enviar correo de confirmación de cuenta
 @app.route('/correos/cuenta', methods=['POST'])
 def enviar_correo_cuenta():
-    from_email = "prometienda.fc@gmail.com"  # Correo del remitente
-    password = "uictyyyzilngdczu"  # Contraseña del correo
+    from_email = "merca.digital.fc@gmail.com"  # Correo del remitente
+    password = "lbrclmaxuyujfwbe"  # Contraseña del correo
     name = request.form.get('nombre')  # Nombre del usuario
     to_email = request.form.get('correo')  # Correo del destinatario
     user_password = request.form.get('contraseña')  # Contraseña del usuario

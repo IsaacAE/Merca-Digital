@@ -103,21 +103,79 @@ export default function Registro() {
         navigate(-1);
     }
 
-    return (
-        <>
-            <div className="fullscreen-shape"></div>
-            <button type="button" className="btn-regresar" onClick={goBack}>
-                <i className="bi bi-arrow-left" />
-            </button>
-            <h1 className="text-white">Registro de usuario</h1>
-            <form className="m-5" onSubmit={handleSubmit}>
-                <fieldset className="container">
-                    <legend className="mt-4">Datos personales</legend>
-                    {/* Campos de entrada */}
-                    ...
+    return(
+        < >
+        <div className="fullscreen-shape"></div>
+        <button type="button" className="btn-regresar" onClick={goBack}><i className="bi bi-arrow-left"/></button>
+        <h1 className="text-white">Registro de usuario</h1>
+        <form className='m-5' onSubmit={handleSubmit}>
+            <fieldset className="container">
+            <legend className="mt-4">Datos personales</legend>
+
+            <div className="row">
+                <div className="col-6">
+                    <label htmlFor='nombre' className='form-label'>Nombre</label>
+                    <input type='text' className='form-control' id='nombre' placeholder='Tu nombre aquí' pattern="[A-Za-záéíóúÁÉÍÓÚñÑ\s]+" maxLength={50} required/>
+                </div>
+                <div className="col-6">
+                    <label htmlFor='apPat' className='form-label'>Apellido paterno</label>
+                    <input type='text' className='form-control' id='apPat' placeholder='Tu apellido aquí' pattern="[A-Za-záéíóúÁÉÍÓÚñÑ\s]+" maxLength={50} required/>
+                </div>
+                <div className="col-6">
+                    <label htmlFor='apMat' className='form-label'>Apellido materno</label>
+                    <input type='text' className='form-control' id='apMat' placeholder='Tu apellido aquí' pattern="[A-Za-záéíóúÁÉÍÓÚñÑ\s]+" maxLength={50} required/>
+                </div>
+                <div className="col-6">
+                    <label htmlFor="correo" className="form-label">Correo electrónico</label>
+                    <input type="email" className="form-control" id="correo" aria-describedby="emailHelp" placeholder="correo@ejemplo.com" required/>
+                </div>
+                <div className="col-6">
+                    <label htmlFor="telefono" className="form-label">Teléfono</label>
+                    <input type="tel" className="form-control" id="telefono" placeholder="Teléfono" pattern="[0-9]{10}" required/>
+                </div>
+                <div className="col-6">
+                    <label htmlFor="contraseña" className="form-label">Contraseña</label>
+                    <input type="password" className="form-control" id="contraseña" placeholder="Contraseña" autoComplete="off" required/>
+                </div>
+            </div>
+                    <label htmlFor="imagen" className="form-label mt-4">Imagen de perfil</label>
+                    <div className="radio">
+                    <div>
+                        <input className="form-check-input" type='radio' name='imagen' id='imagen1' value='1' defaultChecked/>
+                        <img src={gato} alt='Gato' className='imagen-perfil'/>
+                    </div>
+                    <div>
+                        <input className="form-check-input" type='radio' name='imagen' id='imagen2' value='2'/>
+                        <img src={perro} alt='Perro' className='imagen-perfil'/>
+                    </div>
+                    <div>
+                        <input className="form-check-input" type='radio' name='imagen' id='imagen3' value='3'/>
+                        <img src={arbol} alt='Arbol' className='imagen-perfil'/>
+                    </div>
+                </div>
+                <fieldset>
+                <legend className="mt-4">Tipo de cuenta</legend>
+                <div className="form-check">
+                    <div>
+                    <input className="form-check-input" type="radio" name="tipoCuenta" id="tipoCuenta1" value="option1" defaultChecked/>
+                    <label className="form-check-label" htmlFor="tipoCuenta1">
+                        Cliente
+                    </label>
+                    </div>
+                    <div>
+                    <input className="form-check-input" type="radio" name="tipoCuenta" id="tipoCuenta2" value="option2"/>
+                    <label className="form-check-label" htmlFor="tipoCuenta2">
+                        Vendedor
+                    </label>
+                    </div>
+                </div>
                 </fieldset>
-            </form>
+                <div className='text-center'>
+                <button type="submit" className="btn btn-azul mt-5">Registrarse</button>
+                </div>
+            </fieldset>
+        </form>
         </>
-    );
+    )
 }
 

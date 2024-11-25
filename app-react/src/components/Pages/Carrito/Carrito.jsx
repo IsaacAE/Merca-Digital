@@ -285,25 +285,52 @@ export default function Carrito() {
     }
 
     return (
-        <div>
-            {/* UI del carrito */}
-            <h1>Carrito</h1>
-            {products.length === 0 ? (
-                <p>No hay productos en tu carrito</p>
-            ) : (
-                <div>
-                    {products.map(product => (
-                        <div key={product.idProducto}>
-                            <h5>{product.nombreProducto}</h5>
-                            <p>$ {product.precio}</p>
-                            <p>Cantidad: {product.cantidad_carrito}</p>
-                            <button onClick={() => eliminarProducto(product.idProducto)}>Eliminar</button>
-                        </div>
-                    ))}
-                    <button onClick={comprar}>Comprar</button>
+        <>
+            <div className="fullscreen-shape"></div>
+            <button type="button" className="btn-regresar" onClick={goBack}><i className="bi bi-arrow-left"/></button>
+            <h1 className='text-center mt-3 text-white'>Carrito</h1>
+            <section className="py-5">
+                {products.length==0 && (
+                    <p className='text-center'>No hay productos en tu carrito</p>
+                )}
+                <div className="container px-4 px-lg-5 mt-5">
+                    <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                        
+                        {products.map(product => (
+                            <div key={product.idProducto} className="col mb-5">
+
+                                <div key={product.idProducto} className="card h-100 tarjeta">
+                                    <div className='imagen text-center'>
+                                        <img className="card-img-top img-fluid img-card mt-1" src={product.fotourl} alt={product.nombreProducto} onClick={irADetalle(product)} />
+                                    </div>
+                                    <div className="card-body pt-1 mt-4" onClick={irADetalle(product)}>
+                                        <div className="text-center">
+                                            
+                                            <h5 className="fw-bolder">{product.nombreProducto}</h5>
+                                            <p>$ {product.precio}</p>
+                                            <p>Cantidad: {product.cantidad_carrito > product.cantidad? (<>{product.cantidad} {modificaCantidad(product.idProducto, product.cantidad)}</>) : product.cantidad_carrito}</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
+
+                                        <div className="text-center"><a className="btn btn-outline-dark mt-auto btn-eliminar" href="#" onClick={()=>eliminarProducto(product.idProducto)}><i className="bi bi-trash3"/> Eliminar</a></div>   
+                                       
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        ))}
+                        
+                    </div>
                 </div>
-            )}
-        </div>
-    );
+                <div className='text-center'>
+                    <button className='p-4 btn-azul fs-5' onClick={()=>comprar()}>Comprar</button>
+                </div>
+            </section>
+
+
+        </>
+    )
 }
 
