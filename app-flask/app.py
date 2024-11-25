@@ -119,8 +119,8 @@ def enviar_correo_cuenta():
 # Ruta para notificar a vendedores sobre ventas
 @app.route('/correos/notificar', methods=['POST'])
 def enviar_correo_notificacion():
-    from_email = "prometienda.fc@gmail.com"
-    password = "uictyyyzilngdczu"
+    from_email = "merca.digital.fc@gmail.com"
+    password = "lbrclmaxuyujfwbe"
     data = request.get_json()
 
     # Validar datos recibidos
