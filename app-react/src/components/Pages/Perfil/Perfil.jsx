@@ -168,62 +168,118 @@ export default function Perfil() {
         navigate(-1); // Regresa a la página anterior
     }
 
-    return (
+   return (
         <>
-            <button type="button" className="btn-regresar" onClick={goBack}>
-                <i className="bi bi-arrow-left" />
+        <button type="button" className="btn-regresar" onClick={goBack}><i className="bi bi-arrow-left"/></button>
+
+        <div className="profile-container">
+          <div className="fullscreen-shape"></div>
+
+          <h1 className="text-white">Perfil de Usuario</h1>
+          
+          <div className="profile-field">
+            <label>Nombre:</label>
+            {editingField === "nombre" ? (
+              <input
+                type="text"
+                name="nombre"
+                defaultValue={profile.nombre}
+                onChange={handleChange}
+              />
+            ) : (
+              <span>{profile.nombre}</span>
+            )}
+            <button onClick={() => handleEditClick("nombre")}>
+              <i className="bi bi-pencil"></i>
             </button>
+            {editingField && editingField==="nombre" &&(
+                <button className="btn btn-azul" onClick={edit_nombre}>Guardar</button>
+            )}
+          </div>
 
-            <div className="profile-container">
-                <div className="fullscreen-shape"></div>
+          <div className="profile-field">
+            <label>Apellido Paterno:</label>
+            {editingField === "apPat" ? (
+              <input
+                type="text"
+                name="apPat"
+                defaultValue={profile.apPat}
+                onChange={handleChange}
+              />
+            ) : (
+              <span>{profile.apPat}</span>
+            )}
+            <button onClick={() => handleEditClick("apPat")}>
+              <i className="bi bi-pencil"></i>
+            </button>
+            {editingField && editingField==="apPat" &&(
+                <button className="btn btn-azul" onClick={edit_apPat}>Guardar</button>
+            )}
+          </div>
 
-                <h1 className="text-white">Perfil de Usuario</h1>
+          <div className="profile-field">
+            <label>Apellido Materno:</label>
+            {editingField === "apMat" ? (
+              <input
+                type="text"
+                name="apMat"
+                defaultValue={profile.apMat}
+                onChange={handleChange}
+              />
+            ) : (
+              <span>{profile.apMat}</span>
+            )}
+            <button onClick={() => handleEditClick("apMat")}>
+              <i className="bi bi-pencil"></i>
+            </button>
+            {editingField && editingField==="apMat" &&(
+                <button className="btn btn-azul" onClick={edit_apMat}>Guardar</button>
+            )}
+          </div>
 
-                {/* Campos del perfil */}
-                <div className="profile-field">
-                    <label>Nombre:</label>
-                    {editingField === "nombre" ? (
-                        <input
-                            type="text"
-                            name="nombre"
-                            defaultValue={profile.nombre}
-                            onChange={handleChange}
-                        />
-                    ) : (
-                        <span>{profile.nombre}</span>
-                    )}
-                    <button onClick={() => handleEditClick("nombre")}>
-                        <i className="bi bi-pencil"></i>
-                    </button>
-                    {editingField && editingField === "nombre" && (
-                        <button className="btn btn-azul" onClick={edit_nombre}>Guardar</button>
-                    )}
-                </div>
+          <div className="profile-field">
+            <label>Correo:</label>
+            {editingField === "correo" ? (
+              <input
+                type="email"
+                name="correo"
+                defaultValue={profile.correo}
+                onChange={handleChange}
+              />
+            ) : (
+              <span>{profile.correo}</span>
+            )}
+            <button onClick={() => handleEditClick("correo")}>
+              <i className="bi bi-pencil"></i>
+            </button>
+            {editingField && editingField==="correo" &&(
+                <button className="btn btn-azul" onClick={edit_correo}>Guardar</button>
+            )}
+          </div>
 
-                {/* Similar for other fields */}
-                <div className="profile-field">
-                    <label>Apellido Paterno:</label>
-                    {editingField === "apPat" ? (
-                        <input
-                            type="text"
-                            name="apPat"
-                            defaultValue={profile.apPat}
-                            onChange={handleChange}
-                        />
-                    ) : (
-                        <span>{profile.apPat}</span>
-                    )}
-                    <button onClick={() => handleEditClick("apPat")}>
-                        <i className="bi bi-pencil"></i>
-                    </button>
-                    {editingField && editingField === "apPat" && (
-                        <button className="btn btn-azul" onClick={edit_apPat}>Guardar</button>
-                    )}
-                </div>
+          <div className="profile-field">
+            <label>Telefono</label>
+            {editingField === "telefono" ? (
+              <input
+                type="text"
+                name="telefono"
+                defaultValue={profile.telefono}
+                onChange={handleChange}
+                pattern="[0-9]{10}"
+              />
+            ) : (
+              <span>{profile.telefono}</span>
+            )}
+            <button onClick={() => handleEditClick("telefono")}>
+              <i className="bi bi-pencil"></i>
+            </button>
+            {editingField && editingField==="telefono" &&(
+                <button className="btn btn-azul" onClick={edit_telefono}>Guardar</button>
+            )}
+          </div>
 
-                {/* Repetir para los demás campos: apMat, correo, telefono */}
-            </div>
+        </div>
         </>
-    );
+      );
 }
 
