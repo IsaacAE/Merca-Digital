@@ -1,50 +1,91 @@
-# PromeTienda
+# OOZMA KAPPA
+
+## Merca-Digital
+
+La empresa OOZMA KAPPA se enorgullece de presentar el proyecto Merca-Digital. Un sistema de compraventa pensado y diseñado para los estudiantes de la Facultad de Ciencas de la UNAM como una innovación a la emergente "Mercadita" que busca llevar este sistema al mundo digital para beneficiar a compradores y vendedores con un sistema claro, rápido y de pronta comunicación para solucionar los problemas que se han presentado con la constante expansión del mencionado mercado del estudiantado.
 
 ## Colaboradores
 
 - Alcántara Estrada Kevin Isaac
-- Domínguez Barrón Anshar
-- Fernández Blancas Melissa Lizbeth
-- Linares Rios Jatziri
+- Lira Rivera Moisés Abraham
+- Rios Hernández Diego
+- Sánchez Rosas ROberto Samuel
 
+## Especificaciones 
 
-## Para app-flask:
+### Lenguajes de programación
+- **Python**: Versión **3.12.1** (Nov 2024)
+- **JavaScript**: **ECMAScript 2024** (última actualización de la especificación)
+- **HTML**: **HTML5** (especificación final establecida)
+- **CSS**: **CSS3** (incluyendo módulos recientes como CSS Grid y Flexbox)
+- **SQL**: Basado en la especificación **SQL:2016**
 
-Hacer entorno virtual con:
+### Frameworks
+- **SQLAlchemy**: Versión **2.1.0** (Nov 2024)
+- **Flask**: Versión **3.1.x** (Nov 2024)
+- **React**: Versión **18.2.0** (última estable)
 
-pymysql
-Flask-SQLAlchemy
-alchemy
-SQLAlchemy
-pycryptodomex
-flask
-Cryptography
-flask-cors
-Flask-Reuploaded
+### Controladores de versiones
+- **Git**: Versión **2.42.0** (última estable)
+- **GitHub**: No tiene versiones específicas; se encuentra actualizado con las últimas funcionalidades.
 
-O en su defecto, utilizar el archivo requirements.txt que se proporciona
+### IDE y herramientas
+- **Visual Studio Code**: Versión **1.85.0** (Nov 2024)
+- **PostgreSQL**: Versión **16.0** (última estable)
 
-Run:
-python -m flask run
+### Referencias
+- [Python](https://www.python.org/downloads/)
+- [ECMAScript](https://tc39.es/ecma262/)
+- [SQLAlchemy](https://docs.sqlalchemy.org/)
+- [Flask](https://flask.palletsprojects.com/)
+- [React](https://react.dev/)
+- [Git](https://git-scm.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Visual Studio Code](https://code.visualstudio.com/)
 
-## Para app-react:
+## Preparativos
 
+### Para app-flask:
+
+1. Crear y activar un entorno virtual en Python
+# En Windows:
+python -m venv venv
+venv\Scripts\activate
+
+# En sistemas Unix (Linux/macOS):
+python3 -m venv venv
+source venv/bin/activate
+
+2. Instalar las dependencias
+
+- Opción 1: Instalar paquetes uno por uno
+pip install pymysql Flask-SQLAlchemy alchemy SQLAlchemy pycryptodomex flask cryptography flask-cors Flask-Reuploaded
+
+- Opción 2: Usar el archivo requirements.txt
+pip install -r requirements.txt
+
+3. 
+
+### Para app-react:
+
+1. Instalar dependencias necesarias (en Windows y Unix)
 npm install sweetalert2
 npm install react-range
+install react-cookie
+install react-scripts
 npm install
-npm start
 
-(podría requererirse instalar react-scripts y react-cookie con:
+- Si es necesario, instalar paquetes adicionales con el comando:
+npm install <nombre_paquete>
 
-npm install <nombre_paquete>)
+## Ejecución
 
-## Para usar el Login
+1. Entrar al directorio /app-flask
+2. Ejecutar la aplicación Flask con el comando: python -m flask run
+3. Entrar al directorio /app-react
+4. Ejecutar la aplicación React con el comando: npm start
 
-En el archivo de Login.sql ya se pueden ver varios usuarios que pueden ser utilizados para acceder efectivamente haciendo Login en el sistema; sin embargo, se añaden aquí un par de correos y contraseñas válidas para el Login:
-
-- supersolito84@gmail.com / 123 (Vendedor)
-- disneyplusdeal@gmail.com / 123 (Comprador)
 
 ### Nota
 
-Es requerido ejecutar el script de BD.sql para levantar la base de datos y conectarse a la misma
+Es requerido ejecutar el script de BD.sql para levantar la base de datos y conectarse a la misma.
