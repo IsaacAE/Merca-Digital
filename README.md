@@ -48,11 +48,12 @@ La empresa OOZMA KAPPA se enorgullece de presentar el proyecto Merca-Digital. Un
 ### Para app-flask:
 
 1. Crear y activar un entorno virtual en Python
-# En Windows:
+
+En Windows:
 python -m venv venv
 venv\Scripts\activate
 
-# En sistemas Unix (Linux/macOS):
+En sistemas Unix (Linux/macOS):
 python3 -m venv venv
 source venv/bin/activate
 
@@ -64,16 +65,16 @@ pip install pymysql Flask-SQLAlchemy alchemy SQLAlchemy pycryptodomex flask cryp
 - Opción 2: Usar el archivo requirements.txt
 pip install -r requirements.txt
 
-3. 
 
 ### Para app-react:
 
 1. Instalar dependencias necesarias (en Windows y Unix)
-npm install sweetalert2
-npm install react-range
-install react-cookie
-install react-scripts
-npm install
+
+- npm install sweetalert2
+- npm install react-range
+- npm install react-cookie
+- npm install react-scripts
+- npm install
 
 - Si es necesario, instalar paquetes adicionales con el comando:
 npm install <nombre_paquete>
